@@ -17,6 +17,6 @@
 
 - name: Start and enable thelounge
   service:
-    enabled: yes
+    enabled: true
     name: thelounge
     state: started

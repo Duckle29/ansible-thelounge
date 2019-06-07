@@ -1,5 +1,4 @@
 ---
-
 - name: server settings
   set_fact:
     thelounge_server: '{{ thelounge_server | combine(thelounge_server_override, recursive=True) }}'
