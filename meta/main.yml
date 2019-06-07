@@ -1,0 +1,28 @@
+---
+galaxy_info:
+  role_name: "thelounge"
+  author: "Mikkel Jeppesen"
+  description: "Install and configure thelounge irc client"
+  license: "license (MIT)"
+  min_ansible_version: 2.5
+
+  platforms:
+    - name: "Ubuntu"
+      versions:
+        - "trusty"
+        - "xenial"
+        - "bionic"
+    - name: "Debian"
+      versions:
+        - "jessie"
+        - "stretch"
+
+  galaxy_tags:
+    - "thelounge"
+    - "irc"
+
+dependencies:
+  - role: geerlingguy.nodejs
+    vars:
+      nodejs_version: "11.x"
+      nodejs_install_npm_user: root

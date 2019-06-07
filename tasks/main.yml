@@ -1,0 +1,22 @@
+---
+- name: Apply user overrides to dicts
+  include_tasks: 'user_overrides.yml'
+
+- name: OS-specific tasks
+  include_tasks: '{{ ansible_os_family|lower }}.yml'
+
+- name: Stop thelounge before changing config
+  service:
+    name: thelounge
+    state: stopped
+
+- name: Set up config
+  template:
+    src: templates/thelounge-config.js.j2
+    dest: /etc/thelounge/config.js
+
+- name: Start and enable thelounge
+  service:
+    enabled: yes
+    name: thelounge
+    state: started

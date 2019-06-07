@@ -1,0 +1,93 @@
+---
+# The variables are documented in the config.js template
+# Variables that deviate from thelounge defaults are explained
+
+# Use the override in your playbook to override individual keys
+thelounge_server_override: {}
+thelounge_server:
+  public: false
+  port: 9000
+  host: 'undefined'
+  bind: 'undefined'
+  reverse_proxy: false
+  max_history: 10000
+  https:
+    enabled: false
+    key: ''
+    cert: ''
+    ca: ''
+  debug:
+    framework: false
+    rawa: false
+
+# Use the override in your playbook to override individual keys
+thelounge_client_override: {}
+thelounge_client:
+  leave_msg: 'The Lounge - https://thelounge.chat'
+  theme: 'default'
+  transports:
+    - 'polling'
+    - 'websocket'
+  prefetch:
+    enabled: false
+
+    # prefetch storage has been set to true, to prioritise client privacy
+    # over vps storage space. Worst case, 
+    # assuming only links to prefeched content is posted, this will consume 20 GiB
+    storage: true
+    max_size: 2048
+  upload:
+    enable: false
+    max_size: 10240
+
+# Use the override in your playbook to override individual keys
+thelounge_network_override: {}
+thelounge_network:
+  default:
+    name: 'Freenode'
+    host: 'chat.freenode.net'
+    port: 6697
+    password: ''
+    tls: true
+    reject_unauthorized: true
+    nick: 'thelounge%%'
+    username: 'thelounge'
+    realname: 'The Lounge User'
+    join: '#thelounge'
+  display: true
+  lock: false
+
+# Use the override in your playbook to override individual keys
+thelounge_user_mgmt_override: {}
+thelounge_user_mgmt:
+  # To ensure that messages will be reloaded on restarts, only use sqlite
+  message_storage:
+    - sqlite
+  use_hex_ip: false
+  webirc: 'null'
+  identd:
+    enable: false
+    port: 113
+  oidentd: 'null'
+  
+# Use the override in your playbook to override individual keys
+thelounge_ldap_override: {}
+thelounge_ldap:
+  enable: false
+  url: 'ldaps://example.com'
+  tls_options: {}
+  # tls_option:
+  #   - "host: 'my::ip::v6'"
+  #   - "servername: 'example.com'"
+  primary_key: 'uid'
+  search_dn:
+    root_dn:
+      - 'cn=thelounge'
+      - 'ou=system-users'
+      - 'dc=example,dc=com'
+    root_pass: "1234"
+    filter: "(objectClass=person)(memberOf=ou=accounts,dc=example,dc=com)"
+    base: 
+      - 'dc=example'
+      - 'dc=com'
+    scope: "sub"
