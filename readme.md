@@ -6,8 +6,7 @@ This is a work in progress.
 
 ## Role variables
 
-``` yaml
-```
+The variables are described on [their own page](defaults/defaults.md)
 
 ## Example usage
 

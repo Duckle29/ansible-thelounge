@@ -1,11 +1,38 @@
----
+# Role variables
 
-# This can be latest, or a release version from github
+The role variables are divided in two, first there's variables that controll the install of thelounge, like version and install method.
+
+The second part is all the settings for the config. These are arranged in dicts, grouped together by functionality. 
+
+If you want to change a single key in the dicts, then fill these out in the override dicts, otherwise you'll have to copy the full dicts, as you'd otherwise override them entirely.
+
+for example, to just change the port and debug settings:
+
+```yaml
+thelounge_server_override:
+  port: 9001
+  debug:
+    framework: true
+```
+
+The role will replace just the specified keys in the default dict.  
+This isn't necesarry if you have _hash_behaviour = merge_ in your ansible config.
+
+## Control variables:
+
+```yaml
+# This can be latest, or a release version from github. Omit the preceeding v 
 # thelounge_version: '3.0.1'
+# thelounge_version: '3.1.0-pre.2
+#
+# If pre is present in the version number, the role will install thelounge via yarn
+# WARNING: It will not check for or remove any previous installs 
 thelounge_version: 'latest'
+```
 
-### The lounge config variables
+## Config variables:
 
+```yaml
 # The config variables are documented in the config.js template
 # Variables that deviate from thelounge defaults are explained
 
@@ -38,9 +65,10 @@ thelounge_client:
   prefetch:
     enabled: false
 
-    # prefetch storage has been set to true, to prioritise client privacy
-    # over vps storage space. Worst case, 
-    # assuming only links to prefeched content is posted, this will consume 20 GiB
+    # prefetch storage has been set to true to prioritise client privacy
+    # over vps storage space. 
+    # Worst case, assuming only links to prefeched content is posted, 
+    # this will consume 20 GiB per channel with 10000 max history
     storage: true
     max_size: 2048
   upload:
@@ -98,3 +126,4 @@ thelounge_ldap:
       - 'dc=example'
       - 'dc=com'
     scope: "sub"
+```
