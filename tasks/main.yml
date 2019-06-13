@@ -12,7 +12,7 @@
 
 - name: Set up config
   template:
-    src: templates/thelounge-config.js.j2
+    src: templates/config.js.j2
     dest: /etc/thelounge/config.js
 
 - name: Start and enable thelounge

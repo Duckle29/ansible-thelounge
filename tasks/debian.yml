@@ -4,28 +4,26 @@
     state: directory
   register: thelounge_tmp_dir
 
-- name: Get the latest release info
-  uri:
-    url: https://api.github.com/repos/thelounge/thelounge/releases/latest
-    return_content: true
-  register: lounge_json_response
-  failed_when: >
-    lounge_json_response.json.assets.0.content_type !=
-    "application/x-debian-package"
+- name: Set url latest uri
+  set_fact:
+    thelounge_api_url: '{{ thelounge_latest_url }}'
   when:
-    - thelounge_version == 'latest'
+    thelounge_version == 'latest'
 
-- name: Get a specific tagged release
+- name: Set url to release uri
+  set_fact:
+    thelounge_api_url: '{{ thelounge_release_url }}'
+  when:
+    thelounge_version != 'latest'
+
+- name: Get the desired release info
   uri:
-    url: "https://api.github.com/repos/thelounge/thelounge/\
-    releases/tags/v{{ thelounge_version }}"
+    url: '{{ thelounge_api_url }}'
     return_content: true
   register: lounge_json_response
-  failed_when: >
-    lounge_json_response.json.assets.0.content_type !=
-    "application/x-debian-package"
+  failed_when: lounge_json_response.json.assets.0.content_type !=
+    'application/x-debian-package'
   when:
-    - thelounge_version != 'latest'
     - thelounge_version is not search("pre")
 
 - name: Get the .deb file
@@ -35,12 +33,14 @@
   register: thelounge_deb_path
   when:
     - lounge_json_response is defined
+    - lounge_json_response is not skipped
 
 - name: Install thelounge deb
   apt:
-    deb: '{{ thelounge_deb_path }}'
+    deb: '{{ thelounge_deb_path.dest }}'
   when:
-    - lounge_json_response is defined
+    - thelounge_deb_path is defined
+    - thelounge_deb_path is not skipped
 
 - name: Remove the temp download dir
   file:
