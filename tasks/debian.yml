@@ -9,22 +9,27 @@
     url: https://api.github.com/repos/thelounge/thelounge/releases/latest
     return_content: true
   register: lounge_json_response
-  failed_when: lounge_json_response.json.assets.0.content_type != "application/x-debian-package"
+  failed_when: >
+    lounge_json_response.json.assets.0.content_type != 
+    "application/x-debian-package"
   when:
     - thelounge_version == 'latest'
 
 - name: Get a specific tagged release
   uri:
-    url: 'https://api.github.com/repos/thelounge/thelounge/releases/tags/v{{ thelounge_version }}'
+    url: "https://api.github.com/repos/thelounge/thelounge/\
+    releases/tags/v{{ thelounge_version }}"
     return_content: true
   register: lounge_json_response
-  failed_when: lounge_json_response.json.assets.0.content_type != "application/x-debian-package"
+  failed_when: >
+    lounge_json_response.json.assets.0.content_type != 
+    "application/x-debian-package"
   when:
     - thelounge_version != 'latest'
     - thelounge_version is not search("pre")
 
 - name: Get the .deb file
-  get_url: 
+  get_url:
     url: '{{ lounge_json_response.json.assets.0.browser_download_url }}'
     dest: '{{ thelounge_tmp_dir.path }}'
   register: thelounge_deb_path

@@ -39,8 +39,8 @@ thelounge_client:
     enabled: false
 
     # prefetch storage has been set to true, to prioritise client privacy
-    # over vps storage space. Worst case, 
-    # assuming only links to prefeched content is posted, this will consume 20 GiB
+    # over vps storage space. Worst case, assuming only links
+    # to prefeched content is posted, this will consume 20 GiB
     storage: true
     max_size: 2048
   upload:
@@ -76,7 +76,7 @@ thelounge_user_mgmt:
     enable: false
     port: 113
   oidentd: 'null'
-  
+
 # Use the override in your playbook to override individual keys
 thelounge_ldap_override: {}
 thelounge_ldap:
@@ -94,7 +94,7 @@ thelounge_ldap:
       - 'dc=example,dc=com'
     root_pass: "1234"
     filter: "(objectClass=person)(memberOf=ou=accounts,dc=example,dc=com)"
-    base: 
+    base:
       - 'dc=example'
       - 'dc=com'
     scope: "sub"
