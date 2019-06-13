@@ -10,7 +10,7 @@
     return_content: true
   register: lounge_json_response
   failed_when: >
-    lounge_json_response.json.assets.0.content_type != 
+    lounge_json_response.json.assets.0.content_type !=
     "application/x-debian-package"
   when:
     - thelounge_version == 'latest'
@@ -22,7 +22,7 @@
     return_content: true
   register: lounge_json_response
   failed_when: >
-    lounge_json_response.json.assets.0.content_type != 
+    lounge_json_response.json.assets.0.content_type !=
     "application/x-debian-package"
   when:
     - thelounge_version != 'latest'
