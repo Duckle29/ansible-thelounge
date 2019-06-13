@@ -16,7 +16,7 @@ module.exports = {
 	//   channels and scrollbacks are available when they come back.
 	//
 	// This value is set to `false` by default.
-	public: {{ thelounge_server.public|lower }},
+	public: {{ (thelounge_server.public)|lower }},
 
 	// ### `host`
 	//
@@ -346,7 +346,7 @@ module.exports = {
 	// configuration file located at the given path.
 	//
 	// This is set to `null` by default to disable `oidentd` support.
-	oidentd: {{ thelounge_user_mgmt.identd.oidentd }},
+	oidentd: {{ thelounge_user_mgmt.oidentd }},
 
 	// ## LDAP support
 	// These settings enable and configure LDAP authentication.

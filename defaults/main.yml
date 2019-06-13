@@ -72,10 +72,10 @@ thelounge_user_mgmt:
     - sqlite
   use_hex_ip: false
   webirc: 'null'
+  oidentd: 'null'
   identd:
     enable: false
     port: 113
-  oidentd: 'null'
 
 # Use the override in your playbook to override individual keys
 thelounge_ldap_override: {}

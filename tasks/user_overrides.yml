@@ -1,25 +1,30 @@
 ---
 - name: server settings
   set_fact:
-    thelounge_server: >
-      '{{
-      thelounge_server |
-      combine(thelounge_server_override, recursive=True) }}'
+    thelounge_server: >-
+      {{ thelounge_server |
+      combine(thelounge_server_override, recursive=True) }}
 
 - name: client settings
   set_fact:
-    thelounge_https: >
-      '{{ thelounge_client |
-      combine(thelounge_client_override, recursive=True) }}'
+    thelounge_https: >-
+      {{ thelounge_client |
+      combine(thelounge_client_override, recursive=True) }}
 
 - name: irc network settings
   set_fact:
-    thelounge_network: >
-      '{{ thelounge_network |
-      combine(thelounge_network_override, recursive=True) }}'
+    thelounge_network: >-
+      {{ thelounge_network |
+      combine(thelounge_network_override, recursive=True) }}
 
 - name: ldap settings
   set_fact:
-    thelounge_ldap: >
-      '{{ thelounge_ldap |
-      combine(thelounge_ldap_override, recursive=True) }}'
+    thelounge_ldap: >-
+      {{ thelounge_ldap |
+      combine(thelounge_ldap_override, recursive=True) }}
+
+- name: user management settings
+  set_fact:
+    thelounge_user_mgmt: >-
+      {{ thelounge_user_mgmt |
+      combine(thelounge_user_mgmt_override, recursive=True) }}
